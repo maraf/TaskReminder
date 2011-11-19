@@ -1,0 +1,95 @@
+﻿@model TaskReminder.Web.Models.UserEditViewModel
+
+@{
+    ViewBag.Section = Model.User.IsNew ? "Přidat uživatele" : "Editace: " + Model.User.FirstName + " " + Model.User.LastName;
+}
+
+@section ActionPanel {
+    @if (!Model.User.IsNew)
+    {
+        if (Model.User.Password == null)
+        {
+        <strong>Uživatel nemá zadané heslo!</strong>
+        }
+        else
+        { 
+        @UI.DeleteLink("Vymazat heslo", "resetpassword", new { UserID = Model.User.ID, ReturnUrl = Request.Url.AbsolutePath })
+        }
+    }
+}
+
+@using (Html.BeginForm("edit", "account"))
+{
+    @Html.ValidationSummary(true)
+
+    <div class="editor-folder">
+        <div class="editor-item w300">
+            <div class="editor-label">
+                @Html.LabelFor(m => m.User.FirstName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(m => m.User.FirstName)
+                @Html.ValidationMessageFor(m => m.User.FirstName)
+            </div>
+        </div>
+
+        <div class="editor-item w300">
+            <div class="editor-label">
+                @Html.LabelFor(m => m.User.Username)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(m => m.User.Username)
+                @Html.ValidationMessageFor(m => m.User.Username)
+            </div>
+        </div>
+        <div class="clear"></div>
+
+        <div class="editor-item w300">
+            <div class="editor-label">
+                @Html.LabelFor(m => m.User.LastName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(m => m.User.LastName)
+                @Html.ValidationMessageFor(m => m.User.LastName)
+            </div>
+        </div>
+        
+        <div class="editor-item w300">
+            <div class="editor-label">
+                @Html.LabelFor(m => m.User.Role)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(m => m.User.Role, Model.Roles)
+                @Html.ValidationMessageFor(m => m.User.Role)
+            </div>
+        </div>
+        <div class="clear"></div>
+        
+        <div class="editor-item w300">
+            <div class="editor-label">
+                @Html.LabelFor(m => m.User.BossID)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(m => m.User.BossID, Model.Users.AsSelectedList(Model.User.BossID, true))
+                @Html.ValidationMessageFor(m => m.User.BossID)
+            </div>
+        </div>
+        
+        <div class="editor-item w300">
+            <div class="editor-label">
+                @Html.LabelFor(m => m.User.Enabled)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(m => m.User.Enabled)
+                @Html.ValidationMessageFor(m => m.User.Enabled)
+            </div>
+        </div>
+        <div class="clear"></div>
+        
+        @Html.HiddenFor(m => m.User.ID)
+    </div>
+    
+    <div class="buttons">
+        <input type="submit" name="save" value="Uložit" />
+    </div>
+}

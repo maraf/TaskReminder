@@ -1,0 +1,21 @@
+﻿@model IEnumerable<TaskReminder.Core.Domain.Company>
+
+@{
+    ViewBag.Section = "Seznam zákazníků";
+}
+
+@section ActionPanel {
+    @Html.ActionLink("Vytvořit zákazníka", "create", null, new { @class = "tiny-button orange" })
+}
+
+<div class="list-folder">
+    @{ UI.Grid(Model)
+           .SetEmptyText("Žádní zákazníci")
+           .AddCssClass("w700")
+           .AddColumn("ID", t => t.ID)
+           .AddColumn("Název", t => t.Name, "w215")
+           .AddColumn("Adresa", t=> Html.Partial("DisplayTemplates/ShortAddress", t.Address), "w300")
+           .AddColumn("", t=> @Html.ActionLink("Upravit", "edit", new { CompanyID = t.ID}) + " " + Html.ActionLink("Provozovny", "list", "office", new { CompanyID = t.ID }, null))
+           .Render();
+    }
+</div>

@@ -1,0 +1,211 @@
+body {
+    background: url('../Images/Head.png') repeat-x left top;
+}
+
+.all {
+    width: 1100px;
+    margin: 0 auto;
+}
+
+.header .top {
+    background: #fcda9d;
+    border-bottom: 1px solid orange;
+}
+
+.header .top .left, .header .top .right {
+    padding: 5px 10px;
+}
+
+.header .top h1 {
+    font-size: 14px;
+    margin: 0;
+}
+
+.body .section {
+    height: 48px;
+    background: #eeeeee;
+    border-bottom: 1px solid #cccccc;
+}
+
+.body .section h2 {
+    max-width: 700px;
+    overflow: hidden;
+    height: 18px;
+}
+
+.body h2 {
+    float: left;
+    margin: 0;
+    padding: 10px;
+}
+
+.body .tabs {
+    height: 20px;
+    float: right;
+    margin: 22px 0 0 0;
+}
+
+.body .tabs .tab-item {
+    color: Black;
+    text-decoration: none;
+    float: left;
+    display: block;
+    margin-right: 5px;
+    padding: 4px 8px;
+    background: white;
+    border-radius: 4px 4px 0 0;
+    border: 1px solid #cccccc;
+}
+
+.body .tabs .tab-item:hover {
+    background: yellow;
+}
+
+.body .tabs .selected {
+    border-width: 1px;
+    border-bottom-color: white;
+}
+
+.body .action-panel {
+    float: right;
+    margin-right: 20px;
+}
+
+.body .buttons {
+    padding: 5px 10px;
+    margin-top: 10px;
+    background: #eeeeee;
+    border-top: 1px solid #cccccc;
+}
+
+.content {
+    padding: 10px /*2*/0px;
+}
+
+.editor-folder, .list-folder, .message-folder {
+    padding: 0 20px;
+}
+
+.editor-folder .editor-folder, .list-folder .list-folder, .message-folder .message-folder {
+    padding: 0;
+}
+
+.foot { }
+
+/* ============================= TINY-BUTTON =========================================== */
+
+.tiny-button, .action-panel a {
+    padding: 2px 4px;
+    color: black;
+    text-decoration: none;
+    background: #eeeeee;
+    border: 1px solid #cccccc;
+}
+
+.tiny-button.orange {
+    background: #FCDA9D;
+    border-color: Orange;
+}
+
+/* ============================= SUB-SECTION =========================================== */
+
+.sub-section {
+    margin-bottom: 10px;
+}
+
+.sub-section h3 {
+    padding: 2px 4px;
+    margin: 0 0 5px 0;
+    /*background: #eeeeee;
+    border: 1px solid #cccccc;*/
+}
+
+.sub-section .data-items {
+    padding: 2px 6px;
+}
+
+.data-items {
+    padding-top: 5px;
+    margin-top: 5px;
+    border-top: 1px solid #dddddd;
+}
+
+.data-items .data-item {
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #dddddd;
+}
+
+/* ============================= PAGES ================================================= */
+
+.item {
+    margin: 0 0 10px 0;
+}
+
+/* ============================= MESSAGE =============================================== */
+
+.message {
+    margin-bottom: 5px;
+    padding: 2px 6px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.message-content {
+    padding: 4px 6px;
+    float: left;
+}
+
+.message-icon {
+    width: 24px;
+    height: 24px;
+    float: left;
+    background: url('../Images/MessageIcons.png') no-repeat;
+}
+
+.message-error {
+    color: Red;
+    background: #fab1b1;
+}
+
+.message-success {
+    color: Green;
+    background: #b9f7b9;
+}
+
+.message-success .message-icon {
+    background-position: -24px 0;
+}
+
+.message-warning {
+    color: Orange;
+    background: #f7d595;
+}
+
+.message-warning .message-icon {
+    background-position: -48px 0;
+}
+
+/* ============================= PAGING ================================================ */
+
+.paging {
+    padding: 4px 0;
+    text-align: right;
+}
+
+.paging a {
+    text-decoration: none;
+    color: #333333;
+    padding: 2px 4px;
+    margin: 0 5px 0 0;
+    background: #eeeeee;
+}
+
+.paging a:hover {
+    background: #cccccc;
+}
+
+.paging a.selected {
+    color: White;
+    background: #333333;
+}

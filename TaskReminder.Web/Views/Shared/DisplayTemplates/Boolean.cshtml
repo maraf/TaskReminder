@@ -1,0 +1,7 @@
+﻿@model Boolean
+
+@if (Model == null) { 
+    @: Nezadáno
+} else {
+    @(Model ? "Ano" : "Ne")
+}

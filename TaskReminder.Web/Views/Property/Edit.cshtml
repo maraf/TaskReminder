@@ -1,0 +1,42 @@
+﻿@model TaskReminder.Core.Domain.PropertyKey
+@using TaskReminder.Core.Domain
+
+@{
+    ViewBag.Section = Model.ID == 0 ? "Založení nové vlastnosti" : "Editace: " + Model.Name;
+}
+
+@using (Html.BeginForm("edit", "property"))
+{
+    @Html.ValidationSummary(true)
+
+    <div class="editor-folder">
+        <div class="editor-item w300">
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Name)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(m => m.Name)
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+        </div>
+        <div class="clear"></div>
+
+        <div class="editor-item w300">
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Target)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(m => m.Target, PropertyTargets.AsSelectedList(Model.Target))
+                @Html.ValidationMessageFor(m => m.Target)
+            </div>
+        </div>
+        <div class="clear"></div>
+        
+        @Html.HiddenFor(m => m.ID)
+        @Html.HiddenFor(m => m.Domain.ID)
+    </div>
+    
+    <div class="buttons">
+        <input type="submit" name="save" value="Uložit" />
+    </div>
+}

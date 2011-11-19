@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskReminder.Core", "TaskReminder.Core\TaskReminder.Core.csproj", "{882B027F-65D5-4CB5-B74F-6B870410E105}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskReminder.Web", "TaskReminder.Web\TaskReminder.Web.csproj", "{B15CA8B0-AD7B-4FC3-93C8-F2B316777005}"
+EndProject
+Project("{2CFEAB61-6A3B-4EB8-B523-560B4BEEF521}") = "TaskReminder.DeployWeb", "TaskReminder.DeployWeb\TaskReminder.DeployWeb.wdproj", "{368D3A8C-2450-4935-AF2C-FFA04EE2072F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{882B027F-65D5-4CB5-B74F-6B870410E105}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{882B027F-65D5-4CB5-B74F-6B870410E105}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{882B027F-65D5-4CB5-B74F-6B870410E105}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{882B027F-65D5-4CB5-B74F-6B870410E105}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B15CA8B0-AD7B-4FC3-93C8-F2B316777005}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B15CA8B0-AD7B-4FC3-93C8-F2B316777005}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B15CA8B0-AD7B-4FC3-93C8-F2B316777005}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B15CA8B0-AD7B-4FC3-93C8-F2B316777005}.Release|Any CPU.Build.0 = Release|Any CPU
+		{368D3A8C-2450-4935-AF2C-FFA04EE2072F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{368D3A8C-2450-4935-AF2C-FFA04EE2072F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = .
+	EndGlobalSection
+EndGlobal

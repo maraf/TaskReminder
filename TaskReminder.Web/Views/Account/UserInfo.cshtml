@@ -1,0 +1,14 @@
+﻿@model TaskReminder.Core.Domain.User
+
+<div class="user-info">
+    <a href="@Url.Action("change", "account")">
+        <strong>@Model.FirstName @Model.LastName</strong>
+    </a>
+
+    -
+    
+    @using (Html.BeginForm("logout", "account", FormMethod.Post, new { @class = "inline-form" }))
+    {
+        <input type="submit" name="logout" value="Odhlásit" class="link-button" />
+    }
+</div>

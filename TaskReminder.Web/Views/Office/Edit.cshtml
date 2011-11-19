@@ -1,0 +1,49 @@
+﻿@model TaskReminder.Core.Domain.Office
+
+@{
+    ViewBag.Section = Model.ID == 0 ? "Vytvoření provozovny" : "Editace";
+}
+
+@using (Html.BeginForm("edit", "office"))
+{
+    @Html.ValidationSummary(false)
+
+    <div class="editor-folder">
+        <div class="editor-item w500">
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Name)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(m => m.Name)
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+        </div>
+        <div class="clear"></div>
+
+        <div class="editor-item w300">
+            <div class="editor-label">
+                @Html.LabelFor(m => m.CompanyID)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(m => m.CompanyID, ((IEnumerable<TaskReminder.Core.Domain.Company>)ViewBag.Companies)
+                    .Select(o => new SelectListItem
+                    {
+                        Selected = Model.CompanyID == o.ID,
+                        Value = o.ID.ToString(),
+                        Text = o.Name
+                    }))
+
+                @Html.ValidationMessageFor(m => m.CompanyID)
+            </div>
+        </div>
+        <div class="clear"></div>
+        
+        @Html.EditorFor(m => m.Address)
+        
+        @Html.HiddenFor(m => m.ID)
+    </div>
+    
+    <div class="buttons">
+        <input type="submit" name="save" value="Uložit" />
+    </div>
+}

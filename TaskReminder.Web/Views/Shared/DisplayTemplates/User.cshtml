@@ -1,0 +1,10 @@
+﻿@model TaskReminder.Core.Domain.User
+
+@if (Model != null)
+{ 
+    <text>@Model.FirstName @Model.LastName</text>
+}
+else
+{
+    @: Nezadáno
+}

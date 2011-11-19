@@ -1,0 +1,62 @@
+﻿@model TaskReminder.Web.Models.CompanyEditViewModel
+
+@{
+    ViewBag.Section = Model.Item.ID == 0 ? "Přidání zákazníka" : "Editace: " + Model.Item.Name;
+
+    int index = 0;  
+}
+
+@using (Html.BeginForm("edit", "company"))
+{
+    @Html.ValidationSummary(false)
+
+    <div class="editor-folder">
+        <div class="editor-item w500">
+            <div class="editor-item">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Item.Name)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(m => m.Item.Name)
+                    @Html.ValidationMessageFor(m => m.Item.Name)
+                </div>
+            </div>
+            <div class="clear"></div>
+
+            @Html.EditorFor(m => m.Item.Address)
+        
+            @Html.EditorFor(m => m.Item.ID)
+        </div>
+    
+        <div class="editor-item w300">
+    
+        @foreach (var item in Model.Keys)
+        {
+            var property = Model.Properties.FirstOrDefault(p => p.Key.ID == item.ID);
+            string value = "";
+            if (property != null)
+            {
+                value = property.Value;
+            }
+        
+            <div class="editor-item">
+                <div class="editor-label">
+                    @Html.Label("[" + @index + "].value", item.Name)
+                </div>
+                <div class="editor-field">
+                    @Html.Hidden("[" + @index + "].key", item.ID)
+                    @Html.TextBox("[" + @index + "].value", value)
+                </div>
+            </div>
+        
+            index++;
+        }
+
+        </div>
+        <div class="clear"></div>
+    </div>
+    
+    <div class="buttons">
+        <input type="submit" name="save" value="Uložit" />
+    </div>
+}

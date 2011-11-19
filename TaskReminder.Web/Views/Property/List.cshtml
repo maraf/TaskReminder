@@ -1,0 +1,32 @@
+﻿@model IEnumerable<TaskReminder.Core.Domain.PropertyKey>
+
+@{
+    ViewBag.Section = "Seznam vlastností";
+}
+
+@section ActionPanel {
+    @Html.ActionLink("Vytvořit vlastnost", "create", null, new { @class = "tiny-button orange" })
+}
+
+<div class="list-folder">
+    <table class="grid w500">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Target</th>
+            <th></th>
+        </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ID</td>
+            <td>@item.Name</td>
+            <td>@item.Target</td>
+            <td>
+                @Html.ActionLink("Edit", "edit", new { ID = item.ID })
+                @UI.DeleteLink("Smazat", "delete", new { ID = item.ID })
+            </td>
+        </tr>
+    }
+    </table>
+</div>
