@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Section = "Seznam úkolů pracovníka";
+}
+
+@section ActionPanel {
+    @Html.ActionLink("Vytvořit úkol", "create", "task")
+}
+
+<div class="sub-section">
+    <h3>Přiřazené úkoly</h3>
+    @Html.Action("AssignedTo")
+</div>
+<div class="sub-section">
+    <h3>Vytvořené úkoly</h3>
+    @Html.Action("CreatedBy")
+</div>

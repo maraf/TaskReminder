@@ -1,0 +1,50 @@
+﻿@using TaskReminder.Web.Core
+
+@{
+    ViewBag.Section = "Přehled změn | sestavení " + VersionInfo.BuildDate.ToString("yyyy-MM-dd");
+}
+
+<div class="editor-folder">
+    <h3>1.0.4</h3>
+    <ul>
+        <li>Řazení úkolů podle záhlaví sloupců</li>
+        <li>Sjednocený grid</li>
+    </ul>
+
+    <h3>v1.0.3</h3>
+    <ul>
+        <li>Zobrazování informativních zpráv po provedení změn</li>
+        <li>Administrátor může resetovat hesla uživatelů</li>
+        <li>Přístup k úkolu pouze pokud má oživatel oprávnění
+            <ul>
+                <li>Administrátor všechny</li>
+                <li>Vedoucí svoje a svých podřízených</li>
+                <li>Pracovník svoje</li>
+                <li>Účetní svoje a "K vyúčtování"</li>
+            </ul>
+        </li>
+        <li>Příprava na filtrování a řazení úkolů</li>
+        <li>Zvýrazňování úkolů <i>3 dny</i> před termínem zpracování</li>
+        <li>Zadávání a zobrazování datumů v českém formátu</li>
+    </ul>
+
+    <h3>v1.0.2</h3>
+    <ul>
+        <li>Rozdělení zadání zákazníka a pobočky v detailu úkolu</li>
+        <li>Rozdělení seznamu zobrazených úkolů do skupin</li>
+        <li>Přílohy pro úkoly</li>
+        <li>Kompletní správa uživatelů</li>
+    </ul>
+
+    <h3>v1.0.1</h3>
+    <ul>
+        <li>Základ pro úkoly</li>
+        <li>Zákazníci a pobočky</li>
+        <li>Možnost přidávat různé vlastnosti k zákazníkům</li>
+    </ul>
+
+    <h3>v1.0.0</h3>
+    <ul>
+        <li>Základ aplikace</li>
+    </ul>
+</div>

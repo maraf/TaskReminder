@@ -1,0 +1,23 @@
+﻿@model IEnumerable<TaskReminder.Core.Domain.User>
+
+@{
+    ViewBag.Section = "Uživatelé";
+}
+
+@section ActionPanel {
+    @Html.ActionLink("Vytvořit uživatele", "create", null, new { @class = "tiny-button orange" })
+}
+
+<div class="list-folder">
+    @{ UI.Grid(Model)
+           .AddCssClass("w800")
+           .AddColumn("ID", u => u.ID)
+           .AddColumn("Uživ.jméno", u => u.Username)
+           .AddColumn("Jméno", u => u.FirstName + " " + u.LastName)
+           .AddColumn("Role", u => TaskReminder.Core.Domain.Roles.GetRoleName(u.Role))
+           .AddColumn("Nadřízený", u => Html.DisplayFor(m => u.Boss))
+           .AddColumn("Povolený", u => Html.DisplayFor(m => u.Enabled))
+           .AddColumn("", u => Html.ActionLink("Upravit", "edit", new { ID = u.ID }))
+           .Render();
+    }
+</div>

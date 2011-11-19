@@ -1,0 +1,159 @@
+﻿@model TaskReminder.Web.Models.TaskEditViewModel
+
+@{
+    ViewBag.Section = Model.Task.ID == 0 ? "Vytvoření úkolu" : "Editace úkolu: " + Model.Task.Name;
+}
+
+@using (Html.BeginForm("edit", "task"))
+{
+    @Html.ValidationSummary(false)
+    @Html.EditorFor(m => m.Task.ID)
+    @Html.EditorFor(m => m.Task.Created)
+    @Html.HiddenFor(m => m.Task.CreatedByID)
+
+    <div class="editor-folder">
+        <div class="editor-item w700">
+            <div class="editor-item">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Task.Name)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(m => m.Task.Name)
+                    @Html.ValidationMessageFor(m => m.Task.Name)
+                </div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="editor-item">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Task.Description)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(m => m.Task.Description)
+                    @Html.ValidationMessageFor(m => m.Task.Description)
+                </div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="editor-item w300">
+                <div class="editor-label">
+                    <label for="task-company">Zákazník</label>
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownList("Task.Zakaznik", Model.Companies.AsSelectedList())
+                </div>
+            </div>
+
+            <div class="editor-item w300">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Task.OfficeID)
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(m => m.Task.OfficeID, Model.Offices.AsSelectedList(Model.Task.OfficeID))
+                    @Html.ValidationMessageFor(m => m.Task.OfficeID)
+                </div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="editor-item w300">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Task.TaskStateID)
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(m => m.Task.TaskStateID, Model.TaskStates.AsSelectedList(Model.Task.TaskStateID))
+                    @Html.ValidationMessageFor(m => m.Task.TaskStateID)
+                </div>
+            </div>
+
+            <div class="editor-item w300">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Task.AssignedToID)
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(m => m.Task.AssignedToID, Model.Users.AsSelectedList(Model.Task.AssignedToID))
+                    @Html.ValidationMessageFor(m => m.Task.AssignedToID)
+                </div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="editor-item w300">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Task.ToComplete)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(m => m.Task.ToComplete)
+                    @Html.ValidationMessageFor(m => m.Task.ToComplete)
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="editor-item last w330">
+                <div class="editor-label">
+                    <label>Přilohy</label>
+                </div>
+                <div class="editor-field data-items">
+                    @foreach (var attachment in Model.Attachments)
+                    {
+                        <div class="data-item">
+                            <table style="width: 100%">
+                                <tr>
+                                    <td class="w260">@attachment.Name</td>
+                                    <td>@UI.ToByteSize(attachment.ContentLength)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <a target="_blank" href="@Url.Content("~/attachments/" + attachment.FileName)">Stáhnout</a>
+                                        @Html.ActionLink("Upravit", "attachment", new { AttachmentID = attachment.ID })
+                                        @UI.DeleteLink("Smazat", "deleteattachment", new { AttachmentID = attachment.ID })
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    }
+
+                    @if (Model.Task.ID != 0) 
+                    {
+                        @Html.ActionLink("+Přidat", "attachment")
+                    }
+                </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    
+    <div class="buttons">
+        <input type="submit" name="save-button" value="Uložit" />
+        <input type="submit" name="saveandclose-button" value="Uložit a zavřít" />
+        -
+        @Html.ActionLink("Zavřít", "list")
+    </div>
+}
+
+<script type="text/javascript">
+
+    var compOff = new Array();
+    @foreach (var item in Model.Offices) { 
+        <text>compOff[@item.ID] = @item.Company.ID </text>
+    }
+
+    function FilterOffices() {
+        var company = $('#Task_Zakaznik option:selected').val();
+        var first = true;
+        $('#Task_OfficeID option').each(function() {
+            if(compOff[parseInt($(this).val())] == parseInt(company)) {
+                $(this).show();
+                if(first) {
+                    $(this).attr('selected', 'selected');
+                    first = false;
+                }
+            } else {
+                $(this).hide();
+            }
+        });
+    }
+
+    $(function() {
+        FilterOffices();
+        $('#Task_Zakaznik').change(FilterOffices);
+    });
+
+</script>

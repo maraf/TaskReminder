@@ -1,0 +1,218 @@
+﻿body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
+    font-size: 80%;
+}
+
+h1, h2, h3, h4 {
+    margin-top: 0;
+}
+
+h2 { 
+    margin: 0;
+}
+
+table th {
+    text-align: left;
+}
+
+/*a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}*/
+
+.clear {
+    clear: both;
+}
+
+.left {
+    float: left
+}
+
+.right {
+    float: right;
+}
+
+.inline-form {
+    display: inline;
+}
+
+.space {
+    margin: 20px;
+}
+
+/* ============================= GRID ================================================== */
+
+.grid {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.grid th, .grid td {
+    text-align: left;
+    padding: 4px 4px;
+}
+
+.grid th {
+    color: White;
+    background: #333333;
+}
+
+.grid tr.idle {
+    background: #eeeeee;
+}
+
+.grid p {
+    margin: 0 0 5px 0;
+}
+
+.grid .red {
+    color: Red;
+}
+
+.grid th a {
+    color: White;
+    text-decoration: none;
+}
+
+.grid th a:hover {
+    text-decoration: underline;
+}
+
+.grid th.sorted a {
+    color: Orange;
+}
+
+/* ============================= EDITOR FIELDS ========================================= */
+
+input[type=text], textarea, select {
+    border: 1px solid #ABADB3;
+}
+
+input[type=text]:focus, textarea:focus, select:focus {
+    border-color: green;
+}
+
+.editor-item {
+    margin-bottom: 10px;
+}
+
+.editor-item label {
+    font-weight: bold;
+}
+
+.editor-item input[type=text], .editor-item input[type=password], .editor-item textarea, .editor-item select {
+    width: 100%;
+}
+
+.editor-item textarea {
+    height: 125px;
+}
+
+.w30 { width: 30px; }
+.w50 { width: 50px;}
+.w70 { width: 70px; }
+.w100 { width: 100px; }
+.w120 { width: 120px; }
+.w150 { width: 150px; }
+.w200 { width: 200px; }
+.w215 { width: 215px; }
+.w240 { width: 240px; }
+.w260 { width: 260px; }
+.w280 { width: 280px; }
+.w300 { width: 300px; }
+.w330 { width: 330px; }
+.w350 { width: 350px; }
+.w400 { width: 400px; }
+.w500 { width: 500px; }
+.w600 { width: 600px; }
+.w700 { width: 700px; }
+.w800 { width: 800px; }
+.wmax { display: block; }
+
+.h200 textarea { height: 200px; }
+
+.mt20 { margin-top: 20px; }
+
+.editor-item.w30, .editor-item.w50, .editor-item.w70, .editor-item.w100, .editor-item.w120, .editor-item.w150, .editor-item.w200, .editor-item.w215, 
+.editor-item.w240, .editor-item.w260,  .editor-item.w280, 
+.editor-item.w300, .editor-item.w330, .editor-item.w350, .editor-item.w500, .editor-item.w400, .editor-item.w600, .editor-item.w700, .editor-item.w800 {
+    float: left;
+    margin-right: 20px;
+}
+
+.editor-item.last {
+    margin-right: 0;
+}
+
+input[type=button], input[type=submit], button, .editor-panel input[type=button], a.button, .buttons a {
+    cursor: pointer;
+    font-size: small;
+    margin: 0;
+    color: Black;
+    padding: 3px 10px;
+    text-decoration: none;
+    background:url("../Images/Buttons/hborder.png") repeat-x scroll 0 -27px transparent;
+    border: 1px outset #CCCCCC;
+}
+
+a.button, .buttons a {
+    padding: 2px 10px 3px 10px;
+    display: inline-block;
+}
+
+input[type=button]:hover, input[type=submit]:hover, a.button:hover, .buttons a:hover {
+    border-color:#99CCFF #6699EE #6699EE #77AAFF;
+}
+
+input[type=button].link-button, input[type=submit].link-button {
+    color: Blue;
+    display: inline;
+    text-decoration: underline;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: none;
+}
+
+input[type=button].link-button:active, input[type=submit].link-button:active {
+    color: Red;
+}
+
+input[type=button].link-button:visited, input[type=submit].link-button:visited {
+    color: #551A8B;
+}
+
+form.inline {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+/* ============================= VALIDATION ============================================ */
+
+.field-validation-error {
+    color: #ff0000;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error, input[type=text].input-validation-error {
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid {
+    display: none;
+}

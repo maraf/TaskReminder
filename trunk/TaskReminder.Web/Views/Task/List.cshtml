@@ -1,0 +1,37 @@
+﻿@model TaskReminder.Web.Models.TaskListViewModel
+
+@{
+    ViewBag.Section = "Seznam úkolů pracovníka";
+}
+
+@section ActionPanel {
+    Úkoly: 
+    @Html.ActionLink("Všechny", "list")
+    @Html.ActionLink("Vytvořené", "list", new { Type = TaskReminder.Web.Models.TaskListType.Created })
+    @Html.ActionLink("Přiřazené", "list", new { Type = TaskReminder.Web.Models.TaskListType.Assigned })
+    @Html.ActionLink("Zpracovávané", "list", new { Type = TaskReminder.Web.Models.TaskListType.Handled })
+    |
+    @Html.ActionLink("Vytvořit úkol", "create", "task", null, new { @class = "tiny-button orange" })
+}
+
+<div class="list-folder">
+    <h3>@Model.Heading</h3>
+
+    @{ UI.Grid(Model.Items)
+           .SetEmptyText("Žádná data k zobrazení")
+           .OnBuildRow((tr, t) => {
+               if (t.ToComplete != null && t.ToComplete.Value.AddDays(-3) < DateTime.Now)
+                   tr.AddCssClass("red");
+           })
+           .AddColumn("ID", t => t.ID, "w30")
+           .AddColumn("Name", "Název", t => t.Name, "w300")
+           .AddColumn("TaskState", "Stav", t => t.TaskState.Name)
+           .AddColumn("Created", "Vytvořeno", t => t.Created)
+           .AddColumn("CreatedBy", "Vytvořil", t => Html.Partial("DisplayTemplates/User", t.CreatedBy))
+           .AddColumn("Assigned", "Přiřazeno", t => t.Assigned)
+           .AddColumn("AssignedTo", "Zpracovatel", t => Html.Partial("DisplayTemplates/User", t.AssignedTo))
+           .AddColumn("ToComplete", "K dokončení", t => Html.DisplayFor(m => t.ToComplete))
+           .AddColumn("", t => Html.ActionLink("Upravit", "edit", new { TaskId = t.ID }) + " " + UI.DeleteLink("Smazat", "delete", new { TaskID = t.ID }))
+           .Render();
+    }
+</div>

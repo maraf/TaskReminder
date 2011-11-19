@@ -1,0 +1,9 @@
+﻿@model TaskReminder.Core.Domain.Address
+
+@if (Model != null) { 
+    <div class="address">
+        @Model.Street @Model.HouseNumber
+        <br />
+        @Model.City @Model.PostalCode
+    </div>
+}

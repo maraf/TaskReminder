@@ -1,0 +1,40 @@
+﻿@model TaskReminder.Web.Models.UserChangeViewModel
+
+@{
+    ViewBag.Section = "Změnit účet";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <div class="editor-folder">
+        <div class="editor-item w300">
+            <div class="editor-label">
+                @Html.LabelFor(m => m.FirstName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(m => m.FirstName)
+                @Html.ValidationMessageFor(m => m.FirstName)
+            </div>
+        </div>
+        <div class="clear"></div>
+
+        <div class="editor-item w300">
+            <div class="editor-label">
+                @Html.LabelFor(m => m.LastName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(m => m.LastName)
+                @Html.ValidationMessageFor(m => m.LastName)
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    
+    <div class="buttons">
+        <input type="submit" name="save" value="Uložit" />
+        @Html.ActionLink("Změnit heslo", "changepassword", null, new { @class = "button" })
+    </div>
+}
+

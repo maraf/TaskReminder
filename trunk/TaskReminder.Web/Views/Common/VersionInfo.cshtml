@@ -1,0 +1,9 @@
+﻿@using TaskReminder.Web.Core
+
+@{
+    Layout = null;
+}
+
+<span style="font-weight: normal;font-size: 12px;">
+    <text>(</text>@Html.ActionLink("v" + VersionInfo.Version.ToString(), "version", "common")<text>)</text>
+</span>
