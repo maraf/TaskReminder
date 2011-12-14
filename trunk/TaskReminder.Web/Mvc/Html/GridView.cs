@@ -81,7 +81,7 @@ namespace TaskReminder.Web.Mvc.Html
 
         public void Render()
         {
-            if (items != null && items.Count() < 0)
+            if (items == null || items.Count() == 0)
             {
                 writer.Write(emptyText);
                 return;

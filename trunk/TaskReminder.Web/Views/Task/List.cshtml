@@ -29,7 +29,7 @@
            .AddColumn("Created", "Vytvořeno", t => t.Created)
            .AddColumn("CreatedBy", "Vytvořil", t => Html.Partial("DisplayTemplates/User", t.CreatedBy))
            .AddColumn("Assigned", "Přiřazeno", t => t.Assigned)
-           .AddColumn("AssignedTo", "Zpracovatel", t => Html.Partial("DisplayTemplates/User", t.AssignedTo))
+           .AddColumn("AssignedTo", "Zpracovatel", t => t.AssignedTo != null ? Html.Partial("DisplayTemplates/User", t.AssignedTo) : MvcHtmlString.Create(""))
            .AddColumn("ToComplete", "K dokončení", t => Html.DisplayFor(m => t.ToComplete))
            .AddColumn("", t => Html.ActionLink("Upravit", "edit", new { TaskId = t.ID }) + " " + UI.DeleteLink("Smazat", "delete", new { TaskID = t.ID }))
            .Render();
