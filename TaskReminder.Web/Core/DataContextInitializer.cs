@@ -61,7 +61,17 @@ namespace TaskReminder.Web.Core
                 };
                 context.Users.Add(admin);
 
-                User vedouci = new User
+                User hfp = context.Users.Add(new User
+                {
+                    Username = "hfp",
+                    Password = "ukolovnik",
+                    FirstName = "HF",
+                    LastName = "Protection",
+                    Domain = domain,
+                    Role = Roles.Admin
+                });
+
+                User vedouci = context.Users.Add(new User
                 {
                     Username = "vedouci",
                     Password = "1111",
@@ -69,10 +79,9 @@ namespace TaskReminder.Web.Core
                     LastName = "Vedoucí",
                     Domain = domain,
                     Role = Roles.Manager
-                };
-                context.Users.Add(vedouci);
+                });
 
-                context.Users.Add(new User
+                User pracovnik = context.Users.Add(new User
                 {
                     Username = "pracovnik",
                     Password = "1112",
@@ -83,10 +92,11 @@ namespace TaskReminder.Web.Core
                     Boss = vedouci
                 });
 
-                context.Users.Add(new User
+                User ucetni = context.Users.Add(new User
                 {
                     Username = "ucetni",
-                    FirstName = "Toto je",
+                    Password = "1114",
+                    FirstName = "Paní",
                     LastName = "Účetní",
                     Domain = domain,
                     Role = Roles.BookKeeper,
@@ -231,7 +241,201 @@ namespace TaskReminder.Web.Core
                 },
                 Company = company
             });
+            context.SaveChanges();
             #endregion
+
+            #region Úkoly
+            if (context.Tasks.Count() == 0)
+            {
+                User admin = context.Users.First(u => u.Username == "admin");
+                User hfp = context.Users.First(u => u.Username == "hfp");
+                User vedouci = context.Users.First(u => u.Username == "vedouci");
+                User pracovnik = context.Users.First(u => u.Username == "pracovnik");
+                User ucetni = context.Users.First(u => u.Username == "ucetni");
+
+                TaskState zadano = context.TaskStates.First(s => s.Flag == TaskStateFlag.Assigned);
+                TaskState vytvoreno = context.TaskStates.First(s => s.Flag == TaskStateFlag.Created);
+
+                Office hlObchodPepa = context.Offices.First(o => o.Name == "Hlavní obchod" && o.CompanyID == 1);
+                Office hlObchodAlois = context.Offices.First(o => o.Name == "Hlavní obchod" && o.CompanyID == 2);
+
+                context.Tasks.Add(new Task
+                {
+                    Name = "Testovací úkol",
+                    Description = "Pouze testovací úkol bez velkého smyslu",
+                    Domain = domain,
+                    Created = DateTime.Now,
+                    CreatedBy = hfp,
+                    TaskState = zadano,
+                    Assigned = DateTime.Now,
+                    AssignedTo = vedouci,
+                    Office = hlObchodPepa,
+                    ToComplete = DateTime.Now.AddDays(2)
+                });
+
+                context.Tasks.Add(new Task
+                {
+                    Name = "Testovací úkol 2",
+                    Description = "Pouze testovací úkol bez velkého smyslu",
+                    Domain = domain,
+                    Created = DateTime.Now,
+                    CreatedBy = hfp,
+                    TaskState = zadano,
+                    Assigned = DateTime.Now,
+                    AssignedTo = vedouci,
+                    Office = hlObchodPepa,
+                    ToComplete = DateTime.Now.AddDays(2)
+                });
+
+                context.Tasks.Add(new Task
+                {
+                    Name = "Revize vedení",
+                    Description = "...",
+                    Domain = domain,
+                    Created = DateTime.Now,
+                    CreatedBy = hfp,
+                    TaskState = zadano,
+                    Assigned = DateTime.Now,
+                    AssignedTo = vedouci,
+                    Office = hlObchodPepa,
+                    ToComplete = DateTime.Now.AddDays(2)
+                });
+
+                context.Tasks.Add(new Task
+                {
+                    Name = "Jednorázová revize",
+                    Description = "Nejeden filozof by mohl tvrdit, že balónky se sluncem závodí, ale fyzikové by to jistě vyvrátili. Z fyzikálního pohledu totiž balónky působí zcela nezajímavě. Nejvíc bezpochyby zaujmou děti - jedna malá holčička zrovna včera div nebrečela, že by snad balónky mohly prasknout. A co teprve ta stuha.",
+                    Domain = domain,
+                    Created = DateTime.Now,
+                    CreatedBy = vedouci,
+                    TaskState = zadano,
+                    Assigned = DateTime.Now,
+                    AssignedTo = pracovnik,
+                    Office = hlObchodPepa,
+                    ToComplete = DateTime.Now.AddDays(4)
+                });
+
+                context.Tasks.Add(new Task
+                {
+                    Name = "Nákup nového vybavení",
+                    Description = "Stuha, kterou je každý z trojice balónků uvázán, aby se nevypustil.",
+                    Domain = domain,
+                    Created = DateTime.Now,
+                    CreatedBy = vedouci,
+                    TaskState = zadano,
+                    Assigned = DateTime.Now,
+                    AssignedTo = pracovnik,
+                    Office = hlObchodAlois
+                });
+
+                context.Tasks.Add(new Task
+                {
+                    Name = "Revize hasících přístrojů",
+                    Description = "...",
+                    Domain = domain,
+                    Created = DateTime.Now,
+                    CreatedBy = vedouci,
+                    TaskState = zadano,
+                    Assigned = DateTime.Now,
+                    AssignedTo = pracovnik,
+                    Office = hlObchodAlois,
+                    ToComplete = DateTime.Now.AddDays(6)
+                });
+
+                context.Tasks.Add(new Task
+                {
+                    Name = "Chtěl bych dostat přidáno",
+                    Description = "Šéfe, prsím ...",
+                    Domain = domain,
+                    Created = DateTime.Now,
+                    CreatedBy = pracovnik,
+                    TaskState = zadano,
+                    Assigned = DateTime.Now,
+                    AssignedTo = vedouci,
+                    Office = hlObchodAlois
+                });
+
+                context.Tasks.Add(new Task
+                {
+                    Name = "Testovací úkol 3",
+                    Description = "Pouze testovací úkol bez velkého smyslu",
+                    Domain = domain,
+                    Created = DateTime.Now,
+                    CreatedBy = hfp,
+                    TaskState = vytvoreno,
+                    Office = hlObchodAlois
+                });
+
+                context.Tasks.Add(new Task
+                {
+                    Name = "Testovací úkol 4",
+                    Description = "Pouze testovací úkol bez velkého smyslu",
+                    Domain = domain,
+                    Created = DateTime.Now,
+                    CreatedBy = vedouci,
+                    TaskState = vytvoreno,
+                    Office = hlObchodPepa
+                });
+
+                context.Tasks.Add(new Task
+                {
+                    Name = "Nákup vrtaček",
+                    Description = "...",
+                    Domain = domain,
+                    Created = DateTime.Now,
+                    CreatedBy = hfp,
+                    TaskState = zadano,
+                    Assigned = DateTime.Now,
+                    AssignedTo = vedouci,
+                    Office = hlObchodAlois,
+                    ToComplete = DateTime.Now.AddDays(6)
+                });
+
+                context.Tasks.Add(new Task
+                {
+                    Name = "Nákup hasících přístrojů",
+                    Description = "6ks",
+                    Domain = domain,
+                    Created = DateTime.Now,
+                    CreatedBy = hfp,
+                    TaskState = zadano,
+                    Assigned = DateTime.Now,
+                    AssignedTo = hfp,
+                    Office = hlObchodAlois,
+                    ToComplete = DateTime.Now.AddDays(14)
+                });
+
+                context.Tasks.Add(new Task
+                {
+                    Name = "Testovací úkol 5",
+                    Description = "Pouze testovací úkol bez velkého smyslu",
+                    Domain = domain,
+                    Created = DateTime.Now,
+                    CreatedBy = hfp,
+                    TaskState = zadano,
+                    Assigned = DateTime.Now,
+                    AssignedTo = vedouci,
+                    Office = hlObchodPepa,
+                    ToComplete = DateTime.Now.AddDays(2)
+                });
+
+                context.Tasks.Add(new Task
+                {
+                    Name = "Revize u Pepy",
+                    Description = "Revizi přístrojů ve 2.patře",
+                    Domain = domain,
+                    Created = DateTime.Now,
+                    CreatedBy = vedouci,
+                    TaskState = zadano,
+                    Assigned = DateTime.Now,
+                    AssignedTo = pracovnik,
+                    Office = hlObchodPepa,
+                    ToComplete = DateTime.Now.AddDays(4)
+                });
+            }
+            #endregion
+
+            context.SaveChanges();
         }
     }
 }

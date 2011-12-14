@@ -62,5 +62,8 @@ namespace TaskReminder.Core.Domain
         public int TaskStateID { get; set; }
 
         public virtual TaskState TaskState { get; set; }
+
+        [Display(Name="Opakování")]
+        public TimeSpan? Period { get; set; }
     }
 }

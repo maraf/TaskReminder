@@ -32,6 +32,12 @@ namespace TaskReminder.Web
             );
 
             routes.MapRoute(
+                null,
+                "attachment/{fileName}",
+                new { controller = "file", action = "attachment" }
+            );
+
+            routes.MapRoute(
                 null, // Route name
                 "company", // URL with parameters
                 new { controller = "company", action = "list", id = UrlParameter.Optional } // Parameter defaults

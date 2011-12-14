@@ -85,6 +85,16 @@
                     @Html.ValidationMessageFor(m => m.Task.ToComplete)
                 </div>
             </div>
+
+            <div class="editor-item w300" style="display:none">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Task.Period)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(m => m.Task.Period)
+                    @Html.ValidationMessageFor(m => m.Task.Period)
+                </div>
+            </div>
             <div class="clear"></div>
         </div>
         <div class="editor-item last w330">
@@ -102,7 +112,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <a target="_blank" href="@Url.Content("~/attachments/" + attachment.FileName)">Stáhnout</a>
+                                        <a target="_blank" href="@Url.Content("~/attachment/" + attachment.FileName)">Stáhnout</a>
                                         @Html.ActionLink("Upravit", "attachment", new { AttachmentID = attachment.ID })
                                         @UI.DeleteLink("Smazat", "deleteattachment", new { AttachmentID = attachment.ID })
                                     </td>

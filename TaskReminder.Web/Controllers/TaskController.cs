@@ -110,6 +110,10 @@ namespace TaskReminder.Web.Controllers
         public ActionResult Edit([Bind(Prefix="Task")] Task task)
         {
             task.Domain = CurrentDomain;
+            task.CreatedBy = Repository.Users.FirstOrDefault(u => u.ID == task.CreatedByID);
+            task.AssignedTo = Repository.Users.FirstOrDefault(u => u.ID == task.AssignedToID);
+            task.TaskState = Repository.TaskStates.FirstOrDefault(s => s.ID == task.TaskStateID);
+            task.Office = Repository.Offices.FirstOrDefault(o => o.ID == task.OfficeID);
 
             if (!Permissions.CanAccessTask(task))
                 return View("Sorry");
@@ -151,6 +155,7 @@ namespace TaskReminder.Web.Controllers
             if (Permissions.CanAccessTask(task))
             {
                 Repository.Delete(task);
+                ShowMessage("Úkol smazán.");
             }
             return RedirectToAction("list");
         }
@@ -208,6 +213,7 @@ namespace TaskReminder.Web.Controllers
                 }
                 attachment.Created = DateTime.Now;
                 Repository.Save(attachment);
+                ShowMessage("Příloha uložena k úKolu.");
 
                 return RedirectToAction("edit", new { taskId = taskId });
             }
@@ -226,6 +232,7 @@ namespace TaskReminder.Web.Controllers
                 int taskId = attachment.Task.ID;
                 string file = Server.MapPath(Path.Combine("~/Attachments", attachment.FileName));
                 Repository.Delete(attachment);
+                ShowMessage("Příloha smazána.");
 
                 if(System.IO.File.Exists(file))
                     System.IO.File.Delete(file);

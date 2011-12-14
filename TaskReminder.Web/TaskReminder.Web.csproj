@@ -80,11 +80,13 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\OfficeController.cs" />
     <Compile Include="Controllers\PropertyController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Core\AuthorizeUserAttribute.cs" />
     <Compile Include="Core\DataContextInitializer.cs" />
+    <Compile Include="Core\FileHandler.cs" />
     <Compile Include="Core\Permissions.cs" />
     <Compile Include="Core\RenderHelper.cs" />
     <Compile Include="Core\StringUtil.cs" />
