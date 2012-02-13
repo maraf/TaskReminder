@@ -7,8 +7,8 @@ namespace TaskReminder.Web.Core
 {
     public class VersionInfo
     {
-        public static readonly Version Version = new Version(1, 0, 5);
+        public static readonly Version Version = new Version(1, 0, 6);
 
-        public static readonly DateTime BuildDate = new DateTime(2011, 11, 25);
+        public static readonly DateTime BuildDate = new DateTime(2012, 2, 13);
     }
 }

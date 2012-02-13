@@ -209,3 +209,10 @@ body {
     color: White;
     background: #333333;
 }
+
+
+.task-title {
+    color: Navy;
+    text-decoration: underline;
+    cursor: pointer;
+}

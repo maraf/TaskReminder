@@ -16,6 +16,13 @@
             <div class="editor-item">
                 <div class="editor-label">
                     @Html.LabelFor(m => m.Task.Name)
+
+                    (
+                        <span class="task-title" title="Prevence PO">Prevence PO</span>
+                        <span class="task-title" title="BOZP">BOZP</span>
+                        <span class="task-title" title="Kontrola PBZ">Kontrola PBZ</span>
+                        <span class="task-title" title="Technická kontrola auta">Technická kontrola auta</span>
+                    )
                 </div>
                 <div class="editor-field">
                     @Html.EditorFor(m => m.Task.Name)
@@ -161,9 +168,36 @@
         });
     }
 
+    function FilterOfficesDefault() {
+        var officeID = $('#Task_OfficeID option:selected').val();
+        var company = compOff[parseInt(officeID)];
+        $('#Task_Zakaznik option').each(function() {
+            if($(this).val() == company) {
+                $(this).attr('selected', 'selected');
+            }
+        });
+
+        $('#Task_OfficeID option').each(function() {
+            if(compOff[parseInt($(this).val())] == parseInt(company)) {
+                $(this).show();
+                if($(this).val() == officeID) {
+                    $(this).attr('selected', 'selected');
+                    first = false;
+                }
+            } else {
+                $(this).hide();
+            }
+        });
+    }
+
     $(function() {
-        FilterOffices();
+        FilterOfficesDefault();
         $('#Task_Zakaznik').change(FilterOffices);
+
+        $('.task-title').click(function() {
+            $('#Task_Name').val($(this).attr('title'));
+            $('#Task_Description').focus();
+        });
     });
 
 </script>

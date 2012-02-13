@@ -13,7 +13,7 @@ namespace TaskReminder.Core.Domain
     /// </summary>
     public class Task : BaseEntity, IDomain
     {
-        [Display(Name="Jméno")]
+        [Display(Name="Název úkolu")]
         [Required(ErrorMessage = "Prosím, vyplňte jméno úkolu")]
         public string Name { get; set; }
 
