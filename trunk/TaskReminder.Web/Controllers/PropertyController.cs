@@ -41,9 +41,9 @@ namespace TaskReminder.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Delete(int propertyKeyID)
+        public ActionResult Delete(int id)
         {
-            PropertyKey key = Repository.PropertyKeys.FirstOrDefault(k => k.ID == propertyKeyID);
+            PropertyKey key = Repository.PropertyKeys.FirstOrDefault(k => k.ID == id);
             if (key != null)
             {
                 Repository.Delete(key);

@@ -93,6 +93,17 @@
                 </div>
             </div>
 
+            <div class="editor-item w300">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Task.Completed)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(m => m.Task.Completed)
+                    @Html.ValidationMessageFor(m => m.Task.Completed)
+                </div>
+            </div>
+            <div class="clear"></div>
+
             <div class="editor-item w300" style="display:none">
                 <div class="editor-label">
                     @Html.LabelFor(m => m.Task.Period)
@@ -152,20 +163,26 @@
         <text>compOff[@item.ID] = @item.Company.ID </text>
     }
 
+    var officesAll = new Array();
+
     function FilterOffices() {
         var company = $('#Task_Zakaznik option:selected').val();
         var first = true;
-        $('#Task_OfficeID option').each(function() {
-            if(compOff[parseInt($(this).val())] == parseInt(company)) {
-                $(this).show();
+
+        var $office = $('#Task_OfficeID');
+        $office.find('option').remove();
+
+        for (var i = 0; i < officesAll.length; i++) {
+            var $officeItem = $(officesAll[i]);
+
+            if(compOff[parseInt($officeItem.val())] == parseInt(company)) {
+                $office.append($officeItem);
                 if(first) {
-                    $(this).attr('selected', 'selected');
+                    $officeItem.attr('selected', 'selected');
                     first = false;
                 }
-            } else {
-                $(this).hide();
             }
-        });
+        }
     }
 
     function FilterOfficesDefault() {
@@ -178,16 +195,11 @@
         });
 
         $('#Task_OfficeID option').each(function() {
-            if(compOff[parseInt($(this).val())] == parseInt(company)) {
-                $(this).show();
-                if($(this).val() == officeID) {
-                    $(this).attr('selected', 'selected');
-                    first = false;
-                }
-            } else {
-                $(this).hide();
-            }
+            officesAll[officesAll.length] = this;
+            $(this).remove();
         });
+
+        FilterOffices();
     }
 
     $(function() {

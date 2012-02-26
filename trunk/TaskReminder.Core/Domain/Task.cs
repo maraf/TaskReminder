@@ -30,10 +30,15 @@ namespace TaskReminder.Core.Domain
         [Display(Name="Přiřazeno")]
         public DateTime? Assigned { get; set; }
 
-        [Display(Name="Datum dokončení")]
+        [Display(Name = "Datum požadovaného dokončení")]
         [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode=true, DataFormatString="{0:dd.MM.yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
         public DateTime? ToComplete { get; set; }
+
+        [Display(Name = "Datum skutečného dokončení")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
+        public DateTime? Completed { get; set; }
 
         [HiddenInput(DisplayValue = false)]
         public virtual Domain Domain { get; set; }

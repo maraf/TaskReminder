@@ -66,5 +66,20 @@
                 
             </div>
         </div>
+
+        <script type="text/javascript">
+
+            $(function () {
+                $('form').submit(function () {
+                    $(this).find('input[type=submit]').attr('disabled', 'disabled');
+                    window.setTimeout("EnableButtons();", 1000);
+                });
+            });
+
+            function EnableButtons() {
+                $('form').find('input[type=submit]').removeAttr('disabled');
+            }
+        
+        </script>
     </body>
 </html>
