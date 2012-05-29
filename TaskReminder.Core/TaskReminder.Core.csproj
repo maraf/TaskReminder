@@ -73,6 +73,7 @@
     <Compile Include="Domain\Repository\ITaskStateRepository.cs" />
     <Compile Include="Domain\Repository\IUserRepository.cs" />
     <Compile Include="Domain\Roles.cs" />
+    <Compile Include="Domain\TaskTemplate.cs" />
     <Compile Include="Domain\Task.cs" />
     <Compile Include="Domain\TaskAttachment.cs" />
     <Compile Include="Domain\TaskState.cs" />

@@ -65,11 +65,8 @@ namespace TaskReminder.Core.Domain
         public int TaskStateID { get; set; }
         public virtual TaskState TaskState { get; set; }
 
-        [Display(Name="Opakování")]
-        public TimeSpan? Period { get; set; }
-
-        [ForeignKey("RootPeriodTask")]
-        public int? RootPeriodTaskID { get; set; }
-        public virtual Task RootPeriodTask { get; set; }
+        [ForeignKey("TaskTemplate")]
+        public int? TaskTemplateID { get; set; }
+        public virtual TaskTemplate TaskTemplate { get; set; }
     }
 }

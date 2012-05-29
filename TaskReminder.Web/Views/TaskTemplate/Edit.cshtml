@@ -1,0 +1,198 @@
+﻿@model TaskReminder.Web.Models.TaskTemplateEditViewModel
+
+@{
+    ViewBag.Section = Model.Task.ID == 0 ? "Vytvoření opakovaného úkolu" : "Editace opakovaného úkolu: " + Model.Task.Name;
+}
+
+@using (Html.BeginForm("edit", "tasktemplate"))
+{
+    @Html.ValidationSummary(false)
+    @Html.EditorFor(m => m.Task.ID)
+    @Html.EditorFor(m => m.Task.Created)
+    @Html.HiddenFor(m => m.Task.CreatedByID)
+
+    <div class="editor-folder">
+        <div class="editor-item w700">
+            <div class="editor-item">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Task.Name)
+
+                    (
+                        <span class="task-title" title="Prevence PO">Prevence PO</span>
+                        <span class="task-title" title="BOZP">BOZP</span>
+                        <span class="task-title" title="Kontrola PBZ">Kontrola PBZ</span>
+                        <span class="task-title" title="Technická kontrola auta">Technická kontrola auta</span>
+                    )
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(m => m.Task.Name)
+                    @Html.ValidationMessageFor(m => m.Task.Name)
+                </div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="editor-item">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Task.Description)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(m => m.Task.Description)
+                    @Html.ValidationMessageFor(m => m.Task.Description)
+                </div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="editor-item w300">
+                <div class="editor-label">
+                    <label for="task-company">Zákazník</label>
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownList("Task.Zakaznik", Model.Companies.AsSelectedList())
+                </div>
+            </div>
+
+            <div class="editor-item w300">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Task.OfficeID)
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(m => m.Task.OfficeID, Model.Offices.AsSelectedList(Model.Task.OfficeID))
+                    @Html.ValidationMessageFor(m => m.Task.OfficeID)
+                </div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="editor-item w300">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Task.TaskStateID)
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(m => m.Task.TaskStateID, Model.TaskStates.AsSelectedList(Model.Task.TaskStateID))
+                    @Html.ValidationMessageFor(m => m.Task.TaskStateID)
+                </div>
+            </div>
+
+            <div class="editor-item w300">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Task.AssignedToID)
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(m => m.Task.AssignedToID, Model.Users.AsSelectedList(Model.Task.AssignedToID))
+                    @Html.ValidationMessageFor(m => m.Task.AssignedToID)
+                </div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="editor-item w300">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Task.ToComplete)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(m => m.Task.ToComplete)
+                    @Html.ValidationMessageFor(m => m.Task.ToComplete)
+                </div>
+            </div>
+
+            <div class="editor-item w300">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Task.Completed)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(m => m.Task.Completed)
+                    @Html.ValidationMessageFor(m => m.Task.Completed)
+                </div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="editor-item w300">
+                <div class="editor-field">
+                    @Html.EditorFor(m => m.Task.AutoRepeat)
+                    @Html.LabelFor(m => m.Task.AutoRepeat)
+                    @Html.ValidationMessageFor(m => m.Task.AutoRepeat)
+                    <br />
+                    @Html.EditorFor(m => m.ScheduleNext)
+                    @Html.LabelFor(m => m.ScheduleNext)
+                    @Html.ValidationMessageFor(m => m.ScheduleNext)
+                </div>
+            </div>
+
+            <div class="editor-item w300">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Task.Period)
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(m => m.Task.Period, Model.GetTemplatePeriods())
+                    @Html.ValidationMessageFor(m => m.Task.Period)
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    
+    <div class="buttons">
+        <input type="submit" name="save-button" value="Uložit" />
+        <input type="submit" name="saveandclose-button" value="Uložit a zavřít" />
+        -
+        @Html.ActionLink("Zavřít", "list")
+    </div>
+}
+
+<script type="text/javascript">
+
+    var compOff = new Array();
+    @foreach (var item in Model.Offices)
+    { 
+        <text>compOff[@item.ID] = @item.Company.ID </text>
+    }
+
+    var officesAll = new Array();
+
+    function FilterOffices() {
+        var company = $('#Task_Zakaznik option:selected').val();
+        var first = true;
+
+        var $office = $('#Task_OfficeID');
+        $office.find('option').remove();
+
+        for (var i = 0; i < officesAll.length; i++) {
+            var $officeItem = $(officesAll[i]);
+
+            if(compOff[parseInt($officeItem.val())] == parseInt(company)) {
+                $office.append($officeItem);
+                if(first) {
+                    $officeItem.attr('selected', 'selected');
+                    first = false;
+                }
+            }
+        }
+    }
+
+    function FilterOfficesDefault() {
+        var officeID = $('#Task_OfficeID option:selected').val();
+        var company = compOff[parseInt(officeID)];
+        $('#Task_Zakaznik option').each(function() {
+            if($(this).val() == company) {
+                $(this).attr('selected', 'selected');
+            }
+        });
+
+        $('#Task_OfficeID option').each(function() {
+            officesAll[officesAll.length] = this;
+            $(this).remove();
+        });
+
+        FilterOffices();
+    }
+
+    $(function() {
+        FilterOfficesDefault();
+        $('#Task_Zakaznik').change(FilterOffices);
+
+        $('.task-title').click(function() {
+            $('#Task_Name').val($(this).attr('title'));
+            $('#Task_Description').focus();
+        });
+    });
+
+</script>

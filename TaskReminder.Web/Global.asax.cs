@@ -33,6 +33,12 @@ namespace TaskReminder.Web
 
             routes.MapRoute(
                 null,
+                "tasktemplate",
+                new { controller = "tasktemplate", action = "list" }
+            );
+
+            routes.MapRoute(
+                null,
                 "attachment/{fileName}",
                 new { controller = "file", action = "attachment" }
             );
@@ -58,7 +64,13 @@ namespace TaskReminder.Web
             routes.MapRoute(
                 null,
                 "task-{taskId}/{action}",
-                new {  controller = "task", action = "detail"}
+                new { controller = "task", action = "detail" }
+            );
+
+            routes.MapRoute(
+                null,
+                "tasktemplate-{taskId}/{action}",
+                new { controller = "tasktemplate", action = "detail" }
             );
 
             routes.MapRoute(

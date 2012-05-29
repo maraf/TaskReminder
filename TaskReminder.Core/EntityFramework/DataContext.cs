@@ -17,6 +17,8 @@ namespace TaskReminder.Core.EntityFramework
 
         public DbSet<Task> Tasks { get; set; }
 
+        public DbSet<TaskTemplate> TaskTemplates { get; set; }
+
         public DbSet<TaskAttachment> TaskAttachments { get; set; }
 
         public DbSet<Company> Companies { get; set; }

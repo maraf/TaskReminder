@@ -27,6 +27,11 @@ namespace TaskReminder.Core.EntityFramework
             get { return context.Tasks; }
         }
 
+        public IQueryable<TaskTemplate> TaskTemplates
+        {
+            get { return context.TaskTemplates; }
+        }
+
         public IQueryable<Company> Companies
         {
             get { return context.Companies; }//.Include("Address"); }
@@ -74,6 +79,11 @@ namespace TaskReminder.Core.EntityFramework
         public void Save(Task task)
         {
             Save(task, t => context.Tasks.Add(t), t => context.Entry(t).State = EntityState.Modified);
+        }
+
+        public void Save(TaskTemplate task)
+        {
+            Save(task, t => context.TaskTemplates.Add(t), t => context.Entry(t).State = EntityState.Modified);
         }
 
         public void Save(TaskAttachment attachment)
@@ -144,6 +154,15 @@ namespace TaskReminder.Core.EntityFramework
                 Delete(attachment);
 
             context.Tasks.Remove(task);
+            context.SaveChanges();
+        }
+
+        public void Delete(TaskTemplate task)
+        {
+            foreach (TaskAttachment attachment in TaskAttachments.Where(ta => ta.Task.ID == task.ID))
+                Delete(attachment);
+
+            context.TaskTemplates.Remove(task);
             context.SaveChanges();
         }
 
