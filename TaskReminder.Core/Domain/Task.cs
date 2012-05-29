@@ -47,7 +47,6 @@ namespace TaskReminder.Core.Domain
         [Display(Name="Provozovna")]
         [Required(ErrorMessage = "Prosím, vyplňte provozovnu zákazníka")]
         public int OfficeID { get; set; }
-
         public virtual Office Office { get; set; }
 
         [Display(Name="Vytvořil")]
@@ -59,16 +58,18 @@ namespace TaskReminder.Core.Domain
         [ForeignKey("AssignedTo")]
         [Display(Name="Pracovník")]
         public int? AssignedToID { get; set; }
-
         public virtual User AssignedTo { get; set; }
 
         [ForeignKey("TaskState")]
         [Display(Name="Stav")]
         public int TaskStateID { get; set; }
-
         public virtual TaskState TaskState { get; set; }
 
         [Display(Name="Opakování")]
         public TimeSpan? Period { get; set; }
+
+        [ForeignKey("RootPeriodTask")]
+        public int? RootPeriodTaskID { get; set; }
+        public virtual Task RootPeriodTask { get; set; }
     }
 }

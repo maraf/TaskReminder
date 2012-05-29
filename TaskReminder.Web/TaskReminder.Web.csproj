@@ -34,8 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.2.2.1.4\lib\net40-Full\Ninject.dll</HintPath>
@@ -86,6 +87,8 @@
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Core\AuthorizeUserAttribute.cs" />
     <Compile Include="Core\DataContextInitializer.cs" />
+    <Compile Include="Core\EmailHelper.cs" />
+    <Compile Include="Core\EmailSender.cs" />
     <Compile Include="Core\FileHandler.cs" />
     <Compile Include="Core\Permissions.cs" />
     <Compile Include="Core\RenderHelper.cs" />

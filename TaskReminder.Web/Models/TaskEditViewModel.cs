@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using TaskReminder.Core.Domain;
+using System.Web.Mvc;
 
 namespace TaskReminder.Web.Models
 {
@@ -29,5 +30,14 @@ namespace TaskReminder.Web.Models
             Companies = new DropDownModel<Company>(companies, o => o.Name);
             Attachments = attachments ?? new List<TaskAttachment>();
         }
+
+        //public IEnumerable<SelectListItem> GetPeriods()
+        //{
+        //    yield return new SelectListItem
+        //    {
+        //        Text = "Měsíčně",
+        //        Value = "monthly",
+        //    };
+        //}
     }
 }

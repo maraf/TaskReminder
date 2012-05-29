@@ -31,10 +31,12 @@ namespace TaskReminder.Core.Domain
         [Display(Name = "Povolený")]
         public bool Enabled { get; set; }
 
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
         [Display(Name = "Nadřízený")]
         [ForeignKey("Boss")]
         public int? BossID { get; set; }
-
         public virtual User Boss { get; set; }
 
         public Domain Domain { get; set; }

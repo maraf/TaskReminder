@@ -109,6 +109,8 @@ namespace TaskReminder.Web.Controllers
         [HttpPost]
         public ActionResult Edit([Bind(Prefix="Task")] Task task)
         {
+            bool isNew = false;
+
             task.Domain = CurrentDomain;
             task.CreatedBy = Repository.Users.FirstOrDefault(u => u.ID == task.CreatedByID);
             task.AssignedTo = Repository.Users.FirstOrDefault(u => u.ID == task.AssignedToID);
@@ -122,6 +124,7 @@ namespace TaskReminder.Web.Controllers
             {
                 task.Created = DateTime.Now;
                 task.CreatedBy = UserContext.CurrentUser;
+                isNew = true;
             }
 
             if (task.AssignedToID != null)
@@ -129,6 +132,9 @@ namespace TaskReminder.Web.Controllers
 
             if (ModelState.IsValid)
             {
+                if ((isNew || HasAssignedChanged(task.ID, task.AssignedToID, task.TaskState.Flag)) && task.AssignedTo != null)
+                    EmailHelper.SendTaskAssigned(task);
+
                 Repository.Save(task);
                 ShowMessage("Úkol uložen.");
 
@@ -146,6 +152,24 @@ namespace TaskReminder.Web.Controllers
                 Repository.Companies.Where(o => o.Domain.ID == CurrentDomain.ID).ToArray(),
                 Repository.TaskAttachments.Where(a => a.Task.ID == task.ID)
             ));
+        }
+
+        private bool HasAssignedChanged(int taskID, int? assignedTo, int newState)
+        {
+            var task = Repository.Tasks.Select(t => new
+            {
+                ID = t.ID,
+                AssignedToID = t.AssignedToID,
+                TaskStateFlag = t.TaskState.Flag
+            }).FirstOrDefault(t => t.ID == taskID);
+
+            if(task == null)
+                return false;
+
+            if (task.AssignedToID != assignedTo && newState == TaskStateFlag.Assigned)
+                return true;
+
+            return task.TaskStateFlag != newState && newState == TaskStateFlag.Assigned;
         }
 
         [HttpPost]
