@@ -102,6 +102,7 @@ namespace TaskReminder.Web.Controllers
             original.FirstName = user.FirstName;
             original.LastName = user.LastName;
             original.Username = user.Username;
+            original.Email = user.Email;
             original.Role = user.Role;
             original.BossID = user.BossID;
             original.Boss = user.Boss;

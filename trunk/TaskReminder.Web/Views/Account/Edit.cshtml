@@ -42,6 +42,16 @@
                 @Html.ValidationMessageFor(m => m.User.Username)
             </div>
         </div>
+
+        <div class="editor-item w300">
+            <div class="editor-label">
+                @Html.LabelFor(m => m.User.Email)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(m => m.User.Email)
+                @Html.ValidationMessageFor(m => m.User.Email)
+            </div>
+        </div>
         <div class="clear"></div>
 
         <div class="editor-item w300">
