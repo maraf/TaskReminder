@@ -9,8 +9,14 @@ namespace TaskReminder.Core.Domain.Repository
     {
         IQueryable<Task> Tasks { get; }
 
+        IQueryable<TaskTemplate> TaskTemplates { get; }
+
         void Save(Task task);
 
         void Delete(Task task);
+
+        void Save(TaskTemplate task);
+
+        void Delete(TaskTemplate task);
     }
 }

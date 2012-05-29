@@ -1,0 +1,29 @@
+﻿@model IEnumerable<TaskReminder.Core.Domain.TaskTemplate>
+
+@{
+    ViewBag.Section = "Seznam plánovaných úkolů";
+}
+
+@section ActionPanel {
+    @if (UserContext.IsManager)
+    { 
+        @Html.ActionLink("Vytvořit opakovaný úkol", "create", "tasktemplate", null, new { @class = "tiny-button orange" })
+    }
+}
+
+<div class="list-folder">
+    <h3>Vše</h3>
+
+    @{ UI.Grid(Model)
+           .SetEmptyText("Žádná data k zobrazení")
+           .AddColumn("ID", t => t.ID, "w30")
+           .AddColumn("Název", t => t.Name, "w300")
+           .AddColumn("Stav", t => t.TaskState.Name)
+           .AddColumn("Vytvořeno", t => t.Created)
+           .AddColumn("Zpracovatel", t => t.AssignedTo != null ? Html.Partial("DisplayTemplates/User", t.AssignedTo) : MvcHtmlString.Create(""))
+           .AddColumn("Opakování", t => TaskReminder.Core.Domain.TemplatePeriods.AsSelectList().First(p => p.Value == t.Period.ToString()).Text)
+           .AddColumn("Auto-plánování", t => Html.DisplayFor(m => t.AutoRepeat))
+           .AddColumn("", t => Html.ActionLink("Upravit", "edit", new { TaskId = t.ID }) + " " + UI.DeleteLink("Smazat", "delete", new { TaskID = t.ID }))
+           .Render();
+    }
+</div>

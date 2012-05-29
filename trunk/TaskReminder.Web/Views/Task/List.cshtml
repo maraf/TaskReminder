@@ -12,6 +12,10 @@
     @Html.ActionLink("Zpracovávané", "list", new { Type = TaskReminder.Web.Models.TaskListType.Handled })
     |
     @Html.ActionLink("Vytvořit úkol", "create", "task", null, new { @class = "tiny-button orange" })
+    @if (UserContext.IsManager)
+    { 
+        @Html.ActionLink("Vytvořit opakovaný úkol", "create", "tasktemplate", null, new { @class = "tiny-button orange" })
+    }
 }
 
 <div class="list-folder">

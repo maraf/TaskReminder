@@ -17,16 +17,18 @@ namespace TaskReminder.Web.Mvc
             //TabList
             TabItem companyList = new TabItem("Zákazníci", "company", "list") { ActiveOnController = "company", ActiveOnAction = "*" };
             TabItem taskList = new TabItem("Úkoly", "task", "list") { ActiveOnController = "task", ActiveOnAction = "*" };
+            TabItem taskTemplateList = new TabItem("Plánované úkoly", "tasktemplate", "list") { ActiveOnController = "tasktemplate", ActiveOnAction = "*" };
             TabItem propertyList = new TabItem("Vlastnosti", "property", "list", Roles.SuperAdmin) { ActiveOnController = "property", ActiveOnAction = "*" };
             TabItem accountList = new TabItem("Uživatelé", "account", "list", Roles.Admin) { ActiveOnController = "account", ActiveOnAction = "*" };
 
             //Register
-            TabList.Register("task", "*", taskList, companyList, accountList, propertyList);
-            TabList.Register("company", "*", taskList, companyList, accountList, propertyList);
-            TabList.Register("office", "*", taskList, companyList, accountList, propertyList);
-            TabList.Register("property", "*", taskList, companyList, accountList, propertyList);
-            TabList.Register("account", "*", taskList, companyList, accountList, propertyList);
-            TabList.Register("common", "*", taskList, companyList, accountList, propertyList);
+            TabList.Register("task", "*", taskList, companyList, accountList, propertyList, taskTemplateList);
+            TabList.Register("tasktemplate", "*", taskList, companyList, accountList, propertyList, taskTemplateList);
+            TabList.Register("company", "*", taskList, companyList, accountList, propertyList, taskTemplateList);
+            TabList.Register("office", "*", taskList, companyList, accountList, propertyList, taskTemplateList);
+            TabList.Register("property", "*", taskList, companyList, accountList, propertyList, taskTemplateList);
+            TabList.Register("account", "*", taskList, companyList, accountList, propertyList, taskTemplateList);
+            TabList.Register("common", "*", taskList, companyList, accountList, propertyList, taskTemplateList);
         }
     }
 }
