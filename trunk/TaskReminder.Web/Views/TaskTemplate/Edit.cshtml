@@ -84,39 +84,27 @@
             <div class="clear"></div>
 
             <div class="editor-item w300">
-                <div class="editor-label">
-                    @Html.LabelFor(m => m.Task.ToComplete)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(m => m.Task.ToComplete)
-                    @Html.ValidationMessageFor(m => m.Task.ToComplete)
-                </div>
-            </div>
-
-            <div class="editor-item w300">
-                <div class="editor-label">
-                    @Html.LabelFor(m => m.Task.Completed)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(m => m.Task.Completed)
-                    @Html.ValidationMessageFor(m => m.Task.Completed)
-                </div>
-            </div>
-            <div class="clear"></div>
-
-            <div class="editor-item w300">
                 <div class="editor-field">
                     @Html.EditorFor(m => m.Task.AutoRepeat)
                     @Html.LabelFor(m => m.Task.AutoRepeat)
                     @Html.ValidationMessageFor(m => m.Task.AutoRepeat)
-                    <br />
-                    @Html.EditorFor(m => m.ScheduleNext)
-                    @Html.LabelFor(m => m.ScheduleNext)
-                    @Html.ValidationMessageFor(m => m.ScheduleNext)
                 </div>
             </div>
 
-            <div class="editor-item w300">
+            <div class="editor-item w170">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Task.CompleteInMonth, "Dokončit v den a měsíc")
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(m => m.Task.CompleteInDay, new { @style = "width: 20px !important" })
+                    @Html.ValidationMessageFor(m => m.Task.CompleteInDay)
+
+                    @Html.DropDownListFor(m => m.Task.CompleteInMonth, Model.GetMonths(), new { @style = "width: 105px !important" })
+                    @Html.ValidationMessageFor(m => m.Task.CompleteInMonth)
+                </div>
+            </div>
+
+            <div class="editor-item w110">
                 <div class="editor-label">
                     @Html.LabelFor(m => m.Task.Period)
                 </div>
@@ -132,7 +120,6 @@
     
     <div class="buttons">
         <input type="submit" name="save-button" value="Uložit" />
-        <input type="submit" name="saveandclose-button" value="Uložit a zavřít" />
         -
         @Html.ActionLink("Zavřít", "list")
     </div>

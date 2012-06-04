@@ -7,13 +7,83 @@ using System.Web.Mvc;
 
 namespace TaskReminder.Core.Domain
 {
-    public class TaskTemplate : Task
+    public class TaskTemplate : BaseEntity
     {
+        [Display(Name = "Název úkolu")]
+        [Required(ErrorMessage = "Prosím, vyplňte jméno úkolu")]
+        public string Name { get; set; }
+
+        [Display(Name = "Popis")]
+        [DataType(DataType.MultilineText)]
+        [Required(ErrorMessage = "Prosím, vyplňte popis")]
+        public string Description { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
+        [Display(Name = "Vytvořeno")]
+        public DateTime Created { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
+        [Display(Name = "Přiřazeno")]
+        public DateTime? Assigned { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
+        public virtual Domain Domain { get; set; }
+
+        [ForeignKey("Office")]
+        [Display(Name = "Provozovna")]
+        [Required(ErrorMessage = "Prosím, vyplňte provozovnu zákazníka")]
+        public int OfficeID { get; set; }
+        public virtual Office Office { get; set; }
+
+        [ForeignKey("CreatedBy")]
+        [Display(Name = "Vytvořil")]
+        public int CreatedByID { get; set; }
+        public virtual User CreatedBy { get; set; }
+
+        [ForeignKey("AssignedTo")]
+        [Display(Name = "Pracovník")]
+        public int? AssignedToID { get; set; }
+        public virtual User AssignedTo { get; set; }
+
+        [ForeignKey("TaskState")]
+        [Display(Name = "Stav")]
+        public int TaskStateID { get; set; }
+        public virtual TaskState TaskState { get; set; }
+
         [Display(Name = "Automaticky opakovat")]
         public bool AutoRepeat { get; set; }
 
         [Display(Name = "Opakování")]
         public int Period { get; set; }
+
+        [Display(Name = "Dokončit v měsíci")]
+        public int CompleteInMonth { get; set; }
+
+        [Display(Name = "Dokončit v den")]
+        [Range(1, 31, ErrorMessage = "Hodnota musí být platný den v měsíci")]
+        public int CompleteInDay { get; set; }
+
+
+        public Task AsTask()
+        {
+            return new Task
+            {
+                Name = Name,
+                Description = Description,
+                Created = Created,
+                Assigned = Assigned,
+                Domain = Domain,
+                OfficeID = OfficeID,
+                Office = Office,
+                CreatedByID = CreatedByID,
+                CreatedBy = CreatedBy,
+                AssignedToID = AssignedToID,
+                AssignedTo = AssignedTo,
+                TaskStateID = TaskStateID,
+                TaskState = TaskState,
+                TaskTemplateID = ID
+            };
+        }
     }
 
     public static class TemplatePeriods

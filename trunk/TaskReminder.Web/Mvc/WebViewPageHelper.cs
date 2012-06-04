@@ -17,7 +17,7 @@ namespace TaskReminder.Web.Mvc
             //TabList
             TabItem companyList = new TabItem("Zákazníci", "company", "list") { ActiveOnController = "company", ActiveOnAction = "*" };
             TabItem taskList = new TabItem("Úkoly", "task", "list") { ActiveOnController = "task", ActiveOnAction = "*" };
-            TabItem taskTemplateList = new TabItem("Plánované úkoly", "tasktemplate", "list") { ActiveOnController = "tasktemplate", ActiveOnAction = "*" };
+            TabItem taskTemplateList = new TabItem("Opakový úkoly", "tasktemplate", "list") { ActiveOnController = "tasktemplate", ActiveOnAction = "*", Role = Roles.Admin };
             TabItem propertyList = new TabItem("Vlastnosti", "property", "list", Roles.SuperAdmin) { ActiveOnController = "property", ActiveOnAction = "*" };
             TabItem accountList = new TabItem("Uživatelé", "account", "list", Roles.Admin) { ActiveOnController = "account", ActiveOnAction = "*" };
 

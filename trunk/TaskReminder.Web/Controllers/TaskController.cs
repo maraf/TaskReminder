@@ -138,9 +138,6 @@ namespace TaskReminder.Web.Controllers
                 Repository.Save(task);
                 ShowMessage("Úkol uložen.");
 
-                if (FormButton.GetButton(Request) == FormButtonType.SaveAndClose)
-                    return RedirectToAction("list");
-
                 return RedirectToAction("edit", new { TaskID = task.ID });
             }
 
