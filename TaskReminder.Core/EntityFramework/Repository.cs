@@ -24,12 +24,12 @@ namespace TaskReminder.Core.EntityFramework
 
         public IQueryable<Task> Tasks
         {
-            get { return context.Tasks; }
+            get { return context.Tasks.OfType<Task>(); }
         }
 
         public IQueryable<TaskTemplate> TaskTemplates
         {
-            get { return context.TaskTemplates; }
+            get { return context.TaskTemplates.OfType<TaskTemplate>(); }
         }
 
         public IQueryable<Company> Companies

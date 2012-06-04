@@ -11,6 +11,21 @@
     }
 }
 
+@helper GetPeriodText(int period) {
+    if (period == 1)
+    { 
+        <text>Každý měsic</text>
+    }
+    else if (period < 5)
+    {
+        <text>@String.Format("Každé {0} měsíce", period)</text>
+    }
+    else
+    { 
+        <text>@String.Format("Každých {0} měsíců", period)</text>
+    }
+}
+
 <div class="list-folder">
     <h3>Vše</h3>
 
@@ -21,7 +36,7 @@
            .AddColumn("Stav", t => t.TaskState.Name)
            .AddColumn("Vytvořeno", t => t.Created)
            .AddColumn("Zpracovatel", t => t.AssignedTo != null ? Html.Partial("DisplayTemplates/User", t.AssignedTo) : MvcHtmlString.Create(""))
-           .AddColumn("Opakování", t => TaskReminder.Core.Domain.TemplatePeriods.AsSelectList().First(p => p.Value == t.Period.ToString()).Text)
+           .AddColumn("Opakování", t => GetPeriodText(t.Period))
            .AddColumn("Auto-plánování", t => Html.DisplayFor(m => t.AutoRepeat))
            .AddColumn("", t => Html.ActionLink("Upravit", "edit", new { TaskId = t.ID }) + " " + UI.DeleteLink("Smazat", "delete", new { TaskID = t.ID }))
            .Render();

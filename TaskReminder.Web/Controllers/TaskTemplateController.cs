@@ -72,14 +72,7 @@ namespace TaskReminder.Web.Controllers
                 }
 
                 Repository.Save(model.Task);
-
-                if (model.ScheduleNext)
-                {
-                    //TODO: Schedule task ...
-                }
-
-                if (FormButton.GetButton(Request) == FormButtonType.SaveAndClose)
-                    return RedirectToAction("list");
+                ShowMessage("Opakový úkol uložen");
 
                 return RedirectToAction("edit", new { TaskID = model.Task.ID });
             }
@@ -94,7 +87,7 @@ namespace TaskReminder.Web.Controllers
             if (task != null)
             {
                 Repository.Delete(task);
-                ShowMessage("Úkol smazán.");
+                ShowMessage("Opakový úkol smazán.");
             }
             return RedirectToAction("list");
         }

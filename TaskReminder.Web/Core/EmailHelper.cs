@@ -15,7 +15,7 @@ namespace TaskReminder.Web.Core
                 <body>
                     Byl vám přiřazen nový úkol<br />
                     Název: <strong><a href='{0}'>{1}</a></strong><br />
-                    Zákazník: {2}
+                    Zákazník: {2}<br />
                     Stav: {3}<br />
                     Požadovaného dokončení: {4}<br />
                     Vytvořil: {5}<br />

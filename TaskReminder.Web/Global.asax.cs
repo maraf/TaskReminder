@@ -97,6 +97,8 @@ namespace TaskReminder.Web
             //ModelBinders.Binders.Add(typeof(DateTime), new DateTimeModelBinder());
             //ModelBinders.Binders.Add(typeof(DateTime?), new DateTimeModelBinder());
 
+            SchedulingService.CreateDailyJob<TaskScheduleJob>();
+
             WebViewPageHelper.RegisterTabs();
         }
     }
