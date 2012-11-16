@@ -24,7 +24,7 @@ namespace TaskReminder.Web.Core
 
         public void Execute()
         {
-            List<int> tasks = new List<int>();
+            HashSet<int> tasks = new HashSet<int>();
             IEnumerable<TaskTemplate> templates = repository.TaskTemplates.Where(t => t.AutoRepeat == true).ToList();
             foreach (TaskTemplate template in templates)
             {
@@ -40,6 +40,13 @@ namespace TaskReminder.Web.Core
                         tasks.Add(task.ID);
                     }
                 }
+            }
+
+            IEnumerable<Task> items = repository.Tasks.Where(t => t.ToComplete != null && t.ToComplete < DateTime.Now && t.RemindDaysBefore != null);
+            foreach (Task task in items)
+            {
+                if (task.ToComplete.Value.Date == DateTime.Now.Date.AddDays(-task.RemindDaysBefore.Value))
+                    tasks.Add(task.ID);
             }
 
             SendEmails(tasks);

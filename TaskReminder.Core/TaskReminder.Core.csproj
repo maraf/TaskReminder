@@ -81,6 +81,14 @@
     <Compile Include="EntityFramework\BaseRepository.cs" />
     <Compile Include="EntityFramework\DataContext.cs" />
     <Compile Include="EntityFramework\Repository.cs" />
+    <Compile Include="Migrations\201211162003565_CompanyDeleted.cs" />
+    <Compile Include="Migrations\201211162003565_CompanyDeleted.Designer.cs">
+      <DependentUpon>201211162003565_CompanyDeleted.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201211162027525_RemindDaysBefore.cs" />
+    <Compile Include="Migrations\201211162027525_RemindDaysBefore.Designer.cs">
+      <DependentUpon>201211162027525_RemindDaysBefore.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\User.cs" />

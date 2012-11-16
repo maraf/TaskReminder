@@ -68,5 +68,8 @@ namespace TaskReminder.Core.Domain
         [ForeignKey("TaskTemplate")]
         public int? TaskTemplateID { get; set; }
         public virtual TaskTemplate TaskTemplate { get; set; }
+
+        [Display(Name = "Připomenout dní před")]
+        public int? RemindDaysBefore { get; set; }
     }
 }

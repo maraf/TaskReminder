@@ -83,7 +83,7 @@
             </div>
             <div class="clear"></div>
 
-            <div class="editor-item w300">
+            <div class="editor-item w200">
                 <div class="editor-label">
                     @Html.LabelFor(m => m.Task.ToComplete)
                 </div>
@@ -100,6 +100,16 @@
                 <div class="editor-field">
                     @Html.EditorFor(m => m.Task.Completed)
                     @Html.ValidationMessageFor(m => m.Task.Completed)
+                </div>
+            </div>
+
+            <div class="editor-item w140">
+                <div class="editor-label">
+                    @Html.LabelFor(m => m.Task.RemindDaysBefore)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(m => m.Task.RemindDaysBefore)
+                    @Html.ValidationMessageFor(m => m.Task.RemindDaysBefore)
                 </div>
             </div>
             <div class="clear"></div>
@@ -206,7 +216,15 @@
         $('#Task_Zakaznik').change(FilterOffices);
 
         $('.task-title').click(function() {
-            $('#Task_Name').val($(this).attr('title'));
+            var value = $(this).attr('title');
+            var currentValue = $('#Task_Name').val().trim();
+            
+            if(currentValue != "") {
+                currentValue += ", ";
+            }
+            currentValue += value;
+
+            $('#Task_Name').val(currentValue);
             $('#Task_Description').focus();
         });
     });

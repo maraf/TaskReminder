@@ -5,6 +5,7 @@ using System.Web;
 using System.Net.Mail;
 using TaskReminder.Core.Domain;
 using System.Net;
+using System.Configuration;
 
 namespace TaskReminder.Web.Core
 {
@@ -18,9 +19,9 @@ namespace TaskReminder.Web.Core
             if (String.IsNullOrEmpty(user.Email))
                 return;
 
-            var fromAddress = new MailAddress(SenderEmail, "Úkolovník");
+            var fromAddress = new MailAddress(ConfigurationManager.AppSettings["SenderEmail"] ?? SenderEmail, "Úkolovník");
             var toAddress = new MailAddress(user.Email, user.FirstName + " " + user.LastName);
-            const string fromPassword = SenderPassword;
+            string fromPassword = ConfigurationManager.AppSettings["SenderPassword"] ?? SenderPassword;
 
             var smtp = new SmtpClient
             {
