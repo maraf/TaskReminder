@@ -90,5 +90,22 @@ namespace TaskReminder.Web.Controllers
 
             return RedirectToAction("list");
         }
+
+        [HttpPost]
+        public ActionResult Delete(int companyId)
+        {
+            Company company = Repository.Companies.FirstOrDefault(c => c.ID == companyId);
+            if (company != null)
+            {
+                Repository.Delete(company);
+                ShowMessage("Zákazník smazán");
+            }
+            else
+            {
+                ShowMessage("Neexistující zákazník", Mvc.HtmlMessageType.Warning);
+            }
+            
+            return RedirectToAction("list");
+        }
     }
 }

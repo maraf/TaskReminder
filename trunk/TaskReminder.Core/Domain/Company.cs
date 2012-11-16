@@ -19,5 +19,7 @@ namespace TaskReminder.Core.Domain
         public virtual Address Address { get; set; }
 
         public virtual Domain Domain { get; set; }
+
+        public bool Deleted { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using TaskReminder.Core.Domain;
@@ -25,8 +26,8 @@ namespace TaskReminder.Web.Core
         public static void SendTaskAssigned(Task task)
         {
             string subject = String.Format("Úkolovník: Byl vám přiřazen nový úkol");
-            string message = String.Format(TaskEmailBodyFormat, 
-                String.Format(TaskEditUrlFormat, task.ID), 
+            string message = String.Format(TaskEmailBodyFormat,
+                String.Format(ConfigurationManager.AppSettings["TaskEditUrlFormat"] ?? TaskEditUrlFormat, task.ID), 
                 task.Name, 
                 task.Office.Company.Name, 
                 task.TaskState.Name, 

@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskReminder.Core", "TaskReminder.Core\TaskReminder.Core.csproj", "{882B027F-65D5-4CB5-B74F-6B870410E105}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskReminder.Web", "TaskReminder.Web\TaskReminder.Web.csproj", "{B15CA8B0-AD7B-4FC3-93C8-F2B316777005}"

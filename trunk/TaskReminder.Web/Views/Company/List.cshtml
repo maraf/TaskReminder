@@ -15,7 +15,11 @@
            .AddColumn("ID", t => t.ID)
            .AddColumn("Název", t => t.Name, "w215")
            .AddColumn("Adresa", t=> Html.Partial("DisplayTemplates/ShortAddress", t.Address), "w300")
-           .AddColumn("", t=> @Html.ActionLink("Upravit", "edit", new { CompanyID = t.ID}) + " " + Html.ActionLink("Provozovny", "list", "office", new { CompanyID = t.ID }, null))
+           .AddColumn("", t => 
+               @Html.ActionLink("Upravit", "edit", new { CompanyID = t.ID}) + " " + 
+               Html.ActionLink("Provozovny", "list", "office", new { CompanyID = t.ID }, null) + " " +
+               @UI.DeleteLink("Smazat", "delete", new { CompanyID = t.ID })
+           , "w200")
            .Render();
     }
 </div>

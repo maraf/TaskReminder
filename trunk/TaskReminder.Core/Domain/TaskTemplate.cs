@@ -63,6 +63,9 @@ namespace TaskReminder.Core.Domain
         [Range(1, 31, ErrorMessage = "Hodnota musí být platný den v měsíci")]
         public int CompleteInDay { get; set; }
 
+        [Display(Name = "Připomenout dní před")]
+        public int? RemindDaysBefore { get; set; }
+
 
         public Task AsTask()
         {
