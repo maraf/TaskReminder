@@ -24,5 +24,7 @@ namespace TaskReminder.Core.Domain
         public int CompanyID { get; set; }
 
         public virtual Company Company { get; set; }
+
+        public bool Deleted { get; set; }
     }
 }

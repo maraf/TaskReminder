@@ -14,7 +14,8 @@
            .AddColumn("ID", t => t.ID)
            .AddColumn("Název", t => t.Name, "w280")
            .AddColumn("Adresa", t => Html.Partial("DisplayTemplates/ShortAddress", t.Address), "w300")
-           .AddColumn("", t => @Html.ActionLink("Upravit", "edit", new { ID = t.ID }))
+           .AddColumn("", t => @Html.ActionLink("Upravit", "edit", new { ID = t.ID }) + " " +
+               @UI.DeleteLink("Smazat", "delete", new { ID = t.ID }), "w100")
            .Render();
     }
 </div>

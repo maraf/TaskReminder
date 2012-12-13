@@ -44,7 +44,7 @@ namespace TaskReminder.Core.EntityFramework
 
         public IQueryable<Office> Offices
         {
-            get { return context.Offices; }//.Include("Address"); }
+            get { return context.Offices.Where(o => !o.Deleted); }//.Include("Address"); }
         }
 
         public IQueryable<PropertyKey> PropertyKeys
@@ -174,7 +174,8 @@ namespace TaskReminder.Core.EntityFramework
 
         public void Delete(Office office)
         {
-            throw new NotImplementedException();
+            office.Deleted = true;
+            context.SaveChanges();
         }
 
         public void Delete(Company company)
