@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using TaskReminder.Core.Domain;
 using TaskReminder.Core.Domain.Repository;
 using TaskReminder.Web.Core;
+using TaskReminder.Web.Mvc;
 
 namespace TaskReminder.Web.Controllers
 {
@@ -47,6 +48,23 @@ namespace TaskReminder.Web.Controllers
                 Company = Repository.Companies.First(c => c.ID == companyID),
                 Address = new Address()
             });
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int companyID, int id)
+        {
+            Office company = Repository.Offices.FirstOrDefault(c => c.ID == id);
+            if (company != null)
+            {
+                Repository.Delete(company);
+                ShowMessage("Provozovna smazán");
+            }
+            else
+            {
+                ShowMessage("Neexistující provozovna", HtmlMessageType.Warning);
+            }
+
+            return RedirectToAction("list", new { CompanyID = companyID });
         }
     }
 }

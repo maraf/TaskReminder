@@ -132,11 +132,11 @@ namespace TaskReminder.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                if ((isNew || HasAssignedChanged(task.ID, task.AssignedToID, task.TaskState.Flag)) && task.AssignedTo != null)
-                    EmailHelper.SendTaskAssigned(task);
-
                 Repository.Save(task);
                 ShowMessage("Úkol uložen.");
+
+                if ((isNew || HasAssignedChanged(task.ID, task.AssignedToID, task.TaskState.Flag)) && task.AssignedTo != null)
+                    EmailHelper.SendTaskAssigned(task);
 
                 return RedirectToAction("edit", new { TaskID = task.ID });
             }

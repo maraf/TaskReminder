@@ -89,6 +89,10 @@
     <Compile Include="Migrations\201211162027525_RemindDaysBefore.Designer.cs">
       <DependentUpon>201211162027525_RemindDaysBefore.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201212131940105_OfficeDeleted.cs" />
+    <Compile Include="Migrations\201212131940105_OfficeDeleted.Designer.cs">
+      <DependentUpon>201212131940105_OfficeDeleted.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\User.cs" />
